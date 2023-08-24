@@ -31,9 +31,25 @@ TextField(
   keyboardType: TextInputType.phone,
   inputFormatters: [
     FilteringTextInputFormatter.allow(RegExp(r'[0-9,+]')),
-    const PhoneNumberTextInputFormatter(
+    const NationalPhoneNumberTextInputFormatter.US(prefix: '+'),
+  ],
+)
+```
+
+Custom phone number format:
+```dart
+TextField(
+  keyboardType: TextInputType.phone,
+  inputFormatters: [
+    FilteringTextInputFormatter.allow(RegExp(r'[0-9,+]')),
+    const NationalPhoneNumberTextInputFormatter(
       prefix: '+',
-      format: PhoneNumberFormat.international,
+      countryCode: '28',
+      groups: [
+        (length: 4, leading: ' [', trailing: '] '),
+        (length: 3, leading: '', trailing: '-'),
+        (length: 3, leading: '', trailing: ' '),
+      ],
     ),
   ],
 )
